@@ -4,9 +4,10 @@ env:
       - BUILD_COMMIT=v1.14
       - PLAT=x86_64
       - UNICODE_WIDTH=32
-      - NP_BUILD_DEP="numpy==1.14"
-      - NP_TEST_DEP="numpy==1.14"
-      - GEN_DEPS="Cython wheel setuptools"
+      - BUILD_DEPENDS="Cython numpy"
+      - TEST_DEPENDS="numpy pytest nose"
+      - PLAT=x86_64
+      - UNICODE_WIDTH=32
 
 language: python
 python: 3.6
@@ -60,8 +61,6 @@ matrix:
         - MB_PYTHON_VERSION=3.6
 
 before_install:
-    - BUILD_DEPENDS="$NP_BUILD_DEP $GEN_DEPS"
-    - TEST_DEPENDS="$NP_TEST_DEP $GEN_DEPS pytest nose"
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     - before_install
@@ -78,3 +77,6 @@ after_success:
     # Upload wheels to Rackspace container
     - pip install twine
     - echo "Upload to Test PyPi here"
+    - echo ${TRAVIS_BUILD_DIR}/wheelhouse/
+    - ls ${TRAVIS_BUILD_DIR}/wheelhouse/
+    # - twine upload --repository-url https://test.pypi.org/legacy/ -u $TESTPYPI_USERNAME -p $TESTPYPI_PASSWORD ${TRAVIS_BUILD_DIR}/wheelhouse/
