@@ -15,6 +15,12 @@ function pip_opts {
 
 function run_tests {
     # Runs tests on installed distribution from an empty directory
+    echo $PWD
+    pip list
+    echo "running tests"
+    echo python --version
     python --version
+    echo pytest --pyargs randomgen
     pytest --pyargs randomgen
+    echo "test complete"
 }
