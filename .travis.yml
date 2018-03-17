@@ -1,8 +1,11 @@
 env:
   global:
-      - REPO_DIR="randomgen"
-      # v1.14
+      # Set these values
       - BUILD_COMMIT="master" 
+      - TESTPYPI_UPLOAD=false
+      - PYPI_UPLOAD=false
+      # These values should not usually change
+      - REPO_DIR="randomgen"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
       - BUILD_DEPENDS="Cython numpy"
@@ -80,4 +83,11 @@ after_success:
     - echo "Upload to Test PyPi here"
     - echo ${TRAVIS_BUILD_DIR}/wheelhouse/
     - ls ${TRAVIS_BUILD_DIR}/wheelhouse/
-    # - twine upload --repository-url https://test.pypi.org/legacy/ -u $TESTPYPI_USERNAME -p $TESTPYPI_PASSWORD ${TRAVIS_BUILD_DIR}/wheelhouse/
+    - |
+      if [[ ${TESTPYPI_UPLOAD} ]]; then
+        twine upload --repository-url https://test.pypi.org/legacy/ -u $TESTPYPI_USERNAME -p $TESTPYPI_PASSWORD ${TRAVIS_BUILD_DIR}/wheelhouse/*
+      fi
+    - |
+      if [[ ${PYPI_UPLOAD} ]]; then
+        twine upload --repository-url https://upload.pypi.org/legacy/ -u $PYPI_USERNAME -p $PYPI_PASSWORD ${TRAVIS_BUILD_DIR}/wheelhouse/*
+      fi
