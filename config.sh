@@ -20,7 +20,9 @@ function run_tests {
     echo "running tests"
     echo python --version
     python --version
-    echo pytest --pyargs randomgen
-    pytest --pyargs randomgen
+    echo python -c "import randomgen as r;print(r.__file__)"
+    python -c "import randomgen as r;print(r.__file__)"
+    echo pytest --pyargs randomgen.tests
+    pytest --pyargs randomgen.tests
     echo "test complete"
 }
