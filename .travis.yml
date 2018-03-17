@@ -2,8 +2,8 @@ env:
   global:
       # Set these values
       - BUILD_COMMIT="master" 
-      - TESTPYPI_UPLOAD=false
-      - PYPI_UPLOAD=false
+      - TESTPYPI_UPLOAD=true
+      - PYPI_UPLOAD=true
       # These values should not usually change
       - REPO_DIR="randomgen"
       - PLAT=x86_64
@@ -84,10 +84,10 @@ after_success:
     - echo ${TRAVIS_BUILD_DIR}/wheelhouse/
     - ls ${TRAVIS_BUILD_DIR}/wheelhouse/
     - |
-      if [[ ${TESTPYPI_UPLOAD} ]]; then
+      if [[ ${TESTPYPI_UPLOAD} == true ]]; then
         twine upload --repository-url https://test.pypi.org/legacy/ -u $TESTPYPI_USERNAME -p $TESTPYPI_PASSWORD ${TRAVIS_BUILD_DIR}/wheelhouse/*
       fi
     - |
-      if [[ ${PYPI_UPLOAD} ]]; then
+      if [[ ${PYPI_UPLOAD} == true ]]; then
         twine upload --repository-url https://upload.pypi.org/legacy/ -u $PYPI_USERNAME -p $PYPI_PASSWORD ${TRAVIS_BUILD_DIR}/wheelhouse/*
       fi
