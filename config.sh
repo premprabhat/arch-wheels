@@ -5,7 +5,10 @@
 function pre_build {
     # Any stuff that you need to do before you start building the wheels
     # Runs in the root directory of this repository.
-    :
+    if [ -n "$IS_OSX" ]; then
+        # Only x86_64 by default
+        ARCH_FLAGS=${ARCH_FLAGS:-"-arch x86_64"}
+    fi
 }
 
 function pip_opts {
@@ -15,14 +18,6 @@ function pip_opts {
 
 function run_tests {
     # Runs tests on installed distribution from an empty directory
-    echo $PWD
-    pip list
-    echo "running tests"
-    echo python --version
     python --version
-    echo python -c "import randomgen as r;print(r.__file__)"
-    python -c "import randomgen as r;print(r.__file__)"
-    echo pytest --pyargs randomgen.tests
     pytest --pyargs randomgen.tests
-    echo "test complete"
 }
