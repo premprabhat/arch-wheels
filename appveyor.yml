@@ -4,32 +4,32 @@ clone_depth: 50
 os: Visual Studio 2015
 
 environment:
+  global:
+    BUILD_COMMIT: v1.14.1
+    TESTPYPI_UPLOAD: "true"
+    PYPI_UPLOAD: "false"
+    PACKAGE_NAME: randomgen
   TESTPYPI_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   TESTPYPI_PASSWORD:
-    secure: 0J56OxqWxMAhXasvCPVZ/Q==    
+    secure: sEkgnJNTN/bQu3Lh8PysOA==
   PYPI_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   PYPI_PASSWORD:
     secure: ufGrse+xSx3blI6bh9bnSg==
-  global:
-    BUILD_COMMIT: master
-    PACKAGE_NAME: randomgen
-    TESTPYPI_UPLOAD: "true"
-    PYPI_UPLOAD: "true"
   matrix:
     - PY_VER: 2.7
       PYTHON_ARCH: "x86"
-#    - PY_VER: 2.7
-#      PYTHON_ARCH: "x86_64"
-#    - PY_VER: 3.5
-#      PYTHON_ARCH: "x86_64"
-#    - PY_VER: 3.5
-#      PYTHON_ARCH: "x86"
-#    - PY_VER: 3.6
-#      PYTHON_ARCH: "x86_64"
-#    - PY_VER: 3.6
-#      PYTHON_ARCH: "x86"
+    - PY_VER: 2.7
+      PYTHON_ARCH: "x86_64"
+    - PY_VER: 3.5
+      PYTHON_ARCH: "x86_64"
+    - PY_VER: 3.5
+      PYTHON_ARCH: "x86"
+    - PY_VER: 3.6
+      PYTHON_ARCH: "x86_64"
+    - PY_VER: 3.6
+      PYTHON_ARCH: "x86"
 
 platform:
     - x64

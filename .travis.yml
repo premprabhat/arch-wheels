@@ -1,9 +1,9 @@
 env:
   global:
       # Set these values
-      - BUILD_COMMIT="master" 
+      - BUILD_COMMIT="v1.14.1" 
       - TESTPYPI_UPLOAD=true
-      - PYPI_UPLOAD=true
+      - PYPI_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="randomgen"
       - PLAT=x86_64
@@ -79,7 +79,13 @@ script:
 
 after_success:
     # Upload wheels to Rackspace container
-    - pip install twine
+    - |
+      if [[ -n ${IS_OSX} ]]; then
+        get_macpython_environment 3.6 twine-env
+        source twine-env/bin/activate
+        pip install --upgrade pip wheel
+      fi
+    - pip install twine 
     - echo "Upload to Test PyPi here"
     - echo ${TRAVIS_BUILD_DIR}/wheelhouse/
     - ls ${TRAVIS_BUILD_DIR}/wheelhouse/
