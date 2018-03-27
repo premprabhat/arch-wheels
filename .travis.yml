@@ -1,9 +1,9 @@
 env:
   global:
       # Set these values
-      - BUILD_COMMIT="v1.14.2" 
-      - TESTPYPI_UPLOAD=true
-      - PYPI_UPLOAD=true
+      - BUILD_COMMIT="master" # "v1.14.2" 
+      - TESTPYPI_UPLOAD=false # true
+      - PYPI_UPLOAD=false # true
       # These values should not usually change
       - REPO_DIR="randomgen"
       - PLAT=x86_64
