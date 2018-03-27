@@ -5,8 +5,8 @@ os: Visual Studio 2015
 
 environment:
   global:
-    BUILD_COMMIT: v1.14.1
-    TESTPYPI_UPLOAD: "false"
+    BUILD_COMMIT: v1.14.2
+    TESTPYPI_UPLOAD: "true"
     PYPI_UPLOAD: "true"
     PACKAGE_NAME: randomgen
   TESTPYPI_USERNAME:
