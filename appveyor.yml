@@ -20,6 +20,10 @@ environment:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   PYPI_PASSWORD:
     secure: ufGrse+xSx3blI6bh9bnSg==
+  ANACONDA_USERNAME:
+    secure: 9D67F9Bcy8PITwg1cezOgw==
+  ANACONDA_PASSWORD:
+    secure: bu/reHxZEadewiZ/JhQEyg==
   matrix:
     - PY_VER: 2.7
       PYTHON_ARCH: "x86"
