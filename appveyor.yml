@@ -8,7 +8,10 @@ environment:
     BUILD_COMMIT: master # v1.14.2
     TESTPYPI_UPLOAD: "false" # "true"
     PYPI_UPLOAD: "false" # "true"
+    CONDA_BUILD: "true"
+    CONDA_UPLOAD: "false"
     PACKAGE_NAME: randomgen
+    CONDA_NUMPY_VERSION: 1.14
   TESTPYPI_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   TESTPYPI_PASSWORD:
@@ -66,4 +69,6 @@ on_success:
   - echo %cd%
   - pip install twine
   - twine_upload.bat
+  - conda_build.bat
+
   
