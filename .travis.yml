@@ -1,11 +1,11 @@
 env:
   global:
       # Set these values
-      - BUILD_COMMIT="master" # "v1.14.2" 
-      - TESTPYPI_UPLOAD=false # true
+      - BUILD_COMMIT="v1.14.3" # "master"
+      - TESTPYPI_UPLOAD=true # false
       - PYPI_UPLOAD=false # true
       - CONDA_BUILD=true
-      - CONDA_UPLOAD=false
+      - CONDA_UPLOAD=true
       # These values should not usually change
       - REPO_DIR="randomgen"
       - PLAT=x86_64

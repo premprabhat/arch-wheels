@@ -1,5 +1,5 @@
 if "%CONDA_BUILD%" == "true" (
-    conda install conda-build
+    conda install conda-build anaconda-client
     if "%CONDA_UPLOAD%" == "true" (
         conda config --set anaconda_upload yes
         anaconda login --username %ANACONDA_USERNAME% --password %ANACONDA_PASSWORD%
