@@ -4,8 +4,8 @@ env:
       - BUILD_COMMIT="v1.14.3" # "master"
       - TESTPYPI_UPLOAD=false # false
       - PYPI_UPLOAD=false # true
-      - CONDA_BUILD=true
-      - CONDA_UPLOAD=true
+      - CONDA_BUILD=false
+      - CONDA_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="randomgen"
       - PLAT=x86_64
@@ -15,6 +15,7 @@ env:
       - PLAT=x86_64
       - UNICODE_WIDTH=32
       - CONDA_NUMPY_VERSION=1.14
+      - SDIST=false
 
 language: python
 python: 3.6
@@ -50,6 +51,7 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
+        - SDIST=true
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
@@ -80,6 +82,13 @@ install:
 script:
     - install_run $PLAT
     - source conda.sh
+    - |
+      if [[ ${SDIST} == true ]]; then
+        cd $REPO_DIR
+        python setup.py sdist
+        mv ./dist/* ../wheelhouse/
+      fi
+
 
 after_success:
     # Upload wheels to Rackspace container
