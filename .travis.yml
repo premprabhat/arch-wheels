@@ -82,9 +82,9 @@ install:
 script:
     - install_run $PLAT
     - source build-conda.sh
-    - echo $PWD
-    - ls
     - source build-sdist.sh
+
+
 
 after_success:
     # Upload wheels to Rackspace container
