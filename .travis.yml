@@ -84,8 +84,6 @@ script:
     - source build-conda.sh
     - source build-sdist.sh
 
-
-
 after_success:
     # Upload wheels to Rackspace container
     - source twine-upload.sh
