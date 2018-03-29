@@ -7,9 +7,9 @@ environment:
   global:
     BUILD_COMMIT: v1.14.3 # master
     TESTPYPI_UPLOAD: "false" # "false"
-    PYPI_UPLOAD: "true" # "true"
-    CONDA_BUILD: "false"
-    CONDA_UPLOAD: "false"
+    PYPI_UPLOAD: "false" # "true"
+    CONDA_BUILD: "true"
+    CONDA_UPLOAD: "true"
     PACKAGE_NAME: randomgen
     CONDA_NUMPY_VERSION: 1.14
   TESTPYPI_USERNAME:
@@ -22,8 +22,8 @@ environment:
     secure: ufGrse+xSx3blI6bh9bnSg==
   ANACONDA_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
-  ANACONDA_PASSWORD:
-    secure: bu/reHxZEadewiZ/JhQEyg==
+  ANACONDA_TOKEN:
+    secure: sGNIyeEysSzD4W0Q9SMB2sK69a5hiM6qGIGPHhtCH9vpGrlSN7nOXr/zbg4X+vvK
   matrix:
     - PY_VER: 2.7
       PYTHON_ARCH: "x86"

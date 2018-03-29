@@ -16,8 +16,9 @@ if [[ ${PLAT} == "x86_64" && ${UNICODE_WIDTH} == "32" && ${CONDA_BUILD} == true 
     cd ${TRAVIS_BUILD_DIR}
     if [[ ${CONDA_UPLOAD} == true ]]; then
         conda config --set anaconda_upload yes
-        anaconda login --username ${ANACONDA_USERNAME} --password ${ANACONDA_PASSWORD}
-    fi;
+    else
+        conda config --set anaconda_upload no
+    fi
     echo conda build --python ${MB_PYTHON_VERSION} --numpy ${CONDA_NUMPY_VERSION} ./conda-recipe
-    conda build --python ${MB_PYTHON_VERSION} --numpy ${CONDA_NUMPY_VERSION} ./conda-recipe
+    conda build --python ${MB_PYTHON_VERSION} --numpy ${CONDA_NUMPY_VERSION} --user ${ANACONDA_USERNAME} --token ${ANACONDA_TOKEN} ./conda-recipe
 fi;
