@@ -11,6 +11,7 @@ if [[ ${SDIST} == true ]]; then
     ls -l ../
     echo mv -v dist/* ../wheelhouse/
     # mv -v dist/* ../wheelhouse/
+    cd ${TRAVIS_BUILD_DIR}
 else
     echo "sdist is disabled"
 fi

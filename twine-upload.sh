@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 if [[ ${TESTPYPI_UPLOAD} == true  || ${PYPI_UPLOAD} == true ]]; then
     if [[ -n ${IS_OSX} ]]; then
         get_macpython_environment 3.6 twine-env

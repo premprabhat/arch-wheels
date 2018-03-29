@@ -82,16 +82,9 @@ install:
 script:
     - install_run $PLAT
     - source build-conda.sh
-    # - source build-sdist.sh
-    #- |
-    #  if [[ ${SDIST} == true ]]; then	
-    #    pip install numpy cython	
-    #    cd $REPO_DIR	
-    #    python --version	
-    #    python -c "import Cython.Compiler.Options"	
-    #    python setup.py sdist	
-    #    mv ./dist/* ../wheelhouse/	
-    #  fi    
+    - echo $PWD
+    - ls
+    - source build-sdist.sh
 
 after_success:
     # Upload wheels to Rackspace container
