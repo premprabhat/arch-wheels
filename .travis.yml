@@ -84,7 +84,10 @@ script:
     - source conda.sh
     - |
       if [[ ${SDIST} == true ]]; then
+        pip install numpy cython
         cd $REPO_DIR
+        python --version
+        python -c "import Cython.Compiler.Options"
         python setup.py sdist
         mv ./dist/* ../wheelhouse/
       fi
