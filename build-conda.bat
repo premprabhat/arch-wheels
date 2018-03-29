@@ -7,4 +7,6 @@ if "%CONDA_BUILD%" == "true" (
     )
     echo conda build --python %PY_VER% --numpy %CONDA_NUMPY_VERSION% ./conda-recipe
     conda build --python %PY_VER% --numpy %CONDA_NUMPY_VERSION% --user %ANACONDA_USERNAME% --token %ANACONDA_TOKEN% ./conda-recipe
+) else (
+    echo "conda build is disabled"
 )

@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
+
 if [[ ${PLAT} == "x86_64" && ${UNICODE_WIDTH} == "32" && ${CONDA_BUILD} == true ]]; then
     if [[ ${TRAVIS_OS_NAME} == "osx" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda3.sh;
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda3.sh;
     fi
     if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
-      wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda3.sh;
+        wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda3.sh;
     fi
     chmod +x miniconda3.sh
     ./miniconda3.sh -b
@@ -21,4 +22,6 @@ if [[ ${PLAT} == "x86_64" && ${UNICODE_WIDTH} == "32" && ${CONDA_BUILD} == true 
     fi
     echo conda build --python ${MB_PYTHON_VERSION} --numpy ${CONDA_NUMPY_VERSION} ./conda-recipe
     conda build --python ${MB_PYTHON_VERSION} --numpy ${CONDA_NUMPY_VERSION} --user ${ANACONDA_USERNAME} --token ${ANACONDA_TOKEN} ./conda-recipe
-fi;
+else
+    echo "conda build is disabled"
+fi

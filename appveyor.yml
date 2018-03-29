@@ -72,7 +72,5 @@ on_success:
   - cd %WHEELBUILDER_DIR%\
   - echo %cd%
   - pip install twine
-  - twine_upload.bat
-  - conda_build.bat
-
-  
+  - twine-upload.bat
+  - build-conda.bat
