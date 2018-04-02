@@ -1,5 +1,3 @@
-@echo on
-
 if "%CONDA_BUILD%" == "true" (
     :: Needed for building extensions in python2.7 x64 with cmake.
     :: Since python version and arch is not known at this point, install it everywhere.
