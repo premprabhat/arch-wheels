@@ -5,8 +5,8 @@ os: Visual Studio 2015
 
 environment:
   global:
-    BUILD_COMMIT: v1.14.3 # master
-    TESTPYPI_UPLOAD: "false" # "false"
+    BUILD_COMMIT: v1.14.4 # master
+    TESTPYPI_UPLOAD: "true" # "false"
     PYPI_UPLOAD: "false" # "true"
     CONDA_BUILD: "true"
     CONDA_UPLOAD: "true"
