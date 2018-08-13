@@ -4,7 +4,7 @@ env:
       - BUILD_COMMIT="4.4" # "master"
       - TESTPYPI_UPLOAD=false # false
       - PYPI_UPLOAD=false # true
-      - CONDA_BUILD=false
+      - CONDA_BUILD=true
       - CONDA_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"
@@ -12,7 +12,7 @@ env:
       - UNICODE_WIDTH=32
       - BUILD_PREREQ_DEPENDS="Cython numpy scipy"
       - BUILD_DEPENDS="statsmodels"
-      - TEST_DEPENDS="numpy pytest nose scipy statsmodels matplotlib"
+      - TEST_DEPENDS="numpy pytest nose scipy statsmodels"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
       - CONDA_NUMPY_VERSION=1.14
