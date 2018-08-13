@@ -5,6 +5,9 @@
 function pre_build {
     # Any stuff that you need to do before you start building the wheels
     # Runs in the root directory of this repository.
+
+    # Work around for statsmodels
+    pip install numpy scipy cython  
     if [ -n "$IS_OSX" ]; then
         # Only x86_64 by default
         ARCH_FLAGS=${ARCH_FLAGS:-"-arch x86_64"}
@@ -19,5 +22,5 @@ function pip_opts {
 function run_tests {
     # Runs tests on installed distribution from an empty directory
     python --version
-    pytest --pyargs randomgen.tests
+    pytest --pyargs arch.tests
 }

@@ -1,9 +1,9 @@
 package:
-    name: randomgen
-    version: v1.14.4
+    name: arch
+    version: 4.4
 source:
-    version: v1.14.4
-    git_url: 'https://github.com/bashtage/randomgen.git'
+    version: 4.4
+    git_url: 'https://github.com/bashtage/arch.git'
 build:
     number: 0
 requirements:
@@ -12,13 +12,17 @@ requirements:
         - setuptools
         - cython
         - 'numpy x.x'
+        - scipy
+        - statsmodels
     run:
         - python
         - 'numpy x.x'
+        - scipy
+        - statsmodels        
 test:
     requires:
         - pytest
         - nose
 about:
-    home: 'https://github.com/bashtage/randomgen'
+    home: 'https://github.com/bashtage/arch'
     license: NSCA

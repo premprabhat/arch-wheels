@@ -1,17 +1,18 @@
 env:
   global:
       # Set these values
-      - BUILD_COMMIT="v1.14.4" # "master"
+      - BUILD_COMMIT="4.4" # "master"
       - TESTPYPI_UPLOAD=false # false
       - PYPI_UPLOAD=false # true
       - CONDA_BUILD=false
       - CONDA_UPLOAD=false
       # These values should not usually change
-      - REPO_DIR="randomgen"
+      - REPO_DIR="arch"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
-      - BUILD_DEPENDS="Cython numpy"
-      - TEST_DEPENDS="numpy pytest nose"
+      - BUILD_PREREQ_DEPENDS="Cython numpy scipy"
+      - BUILD_DEPENDS="statsmodels"
+      - TEST_DEPENDS="numpy pytest nose scipy statsmodels matplotlib"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
       - CONDA_NUMPY_VERSION=1.14
@@ -55,7 +56,17 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.6
         - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.7
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.7
+        - PLAT=i686        
     - os: osx
       language: generic
       env:
@@ -68,6 +79,10 @@ matrix:
       language: generic
       env:
         - MB_PYTHON_VERSION=3.6
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.7
 
 before_install:
     - source multibuild/common_utils.sh

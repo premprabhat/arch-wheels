@@ -1,6 +1,7 @@
 [submodule "multibuild"]
 	path = multibuild
 	url = https://github.com/matthew-brett/multibuild
-[submodule "randomgen"]
-	path = randomgen
-	url = https://github.com/bashtage/randomgen
+[submodule "arch"]
+	path = arch
+	url = https://github.com/bashtage/arch
+
