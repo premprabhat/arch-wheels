@@ -12,7 +12,7 @@ if [[ ${PLAT} == "x86_64" && ${UNICODE_WIDTH} == "32" && ${CONDA_BUILD} == true 
     export PATH=${HOME}/miniconda3/bin:$PATH
     conda config --set always_yes true
     conda update --all --quiet
-    conda install conda-build anaconda-client
+    conda install conda-build anaconda-client conda-verify
     echo cd ${TRAVIS_BUILD_DIR}
     cd ${TRAVIS_BUILD_DIR}
     if [[ ${CONDA_UPLOAD} == true ]]; then
