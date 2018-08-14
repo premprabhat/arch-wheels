@@ -10,9 +10,8 @@ env:
       - REPO_DIR="arch"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
-      - BUILD_PREREQ_DEPENDS="Cython numpy scipy"
-      - BUILD_DEPENDS="statsmodels"
-      - TEST_DEPENDS="numpy pytest nose scipy statsmodels"
+      - BUILD_DEPENDS="Cython numpy"
+      - TEST_DEPENDS="numpy scipy pandas statsmodels pytest nose"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
       - CONDA_NUMPY_VERSION=1.14
@@ -100,5 +99,5 @@ script:
     - source build-sdist.sh
 
 after_success:
-    # Upload wheels to Rackspace container
+    # Upload wheels/sdist to PyPI
     - source twine-upload.sh
