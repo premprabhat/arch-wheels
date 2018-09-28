@@ -43,3 +43,12 @@ Uploading the built wheels to pypi
 Wheels are are automatically uploaded using [twine](https://pypi.python.org/pypi/twine). 
 
 Of course, you will need permissions to upload to PyPI, for this to work.
+
+Releasing
+---------
+1. Run `git submodule update --remote --merge`
+2. Search and replace previous version with current (e.g., 4.4.1 -> 4.5.0)
+3. Build travis and appveyor without uploading to PyPi (see to `False`)
+4. Build and upload to test and conda (set these to `True`, PyPi to `False`)
+5. Build and upload to PyPi (set test and conda to `False`)
+
