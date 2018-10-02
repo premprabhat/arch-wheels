@@ -4,7 +4,7 @@ env:
       - BUILD_COMMIT="4.5.0" # "master"
       - TESTPYPI_UPLOAD=false # true or false
       - PYPI_UPLOAD=false
-      - CONDA_BUILD=false
+      - CONDA_BUILD=true
       - CONDA_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"
@@ -51,7 +51,6 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
-        - SDIST=true
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
