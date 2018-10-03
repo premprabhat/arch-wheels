@@ -3,15 +3,15 @@ env:
       # Set these values
       - BUILD_COMMIT="4.5.0" # "master"
       - TESTPYPI_UPLOAD=false # true or false
-      - PYPI_UPLOAD=true
-      - CONDA_BUILD=true
-      - CONDA_UPLOAD=true
+      - PYPI_UPLOAD=false
+      - CONDA_BUILD=false
+      - CONDA_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
-      - BUILD_DEPENDS="Cython numpy"
-      - TEST_DEPENDS="numpy scipy pandas pytest nose"
+      - BUILD_DEPENDS="Cython numpy wheel==0.31.1"
+      - TEST_DEPENDS="numpy scipy pandas pytest nose wheel==0.31.1"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
       - CONDA_NUMPY_VERSION=1.15
