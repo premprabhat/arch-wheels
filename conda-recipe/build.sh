@@ -46,7 +46,5 @@ export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
 export CFLAGS="${CFLAGS} -m${ARCH}"
 export CXXFLAGS="${CXXFLAGS} -m${ARCH}"
 
-# pip install cached_property
-$PYTHON -m pip install --no-deps cached_property
 # Python command to install
 $PYTHON setup.py install --single-version-externally-managed --record=record.txt

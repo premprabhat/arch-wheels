@@ -25,4 +25,6 @@ test:
         - nose
 about:
     home: 'https://github.com/bashtage/arch'
-    license: NSCA
+    license: NCSA
+    license_file: LICENSE.md
+    summary: ARCH (volatility) model and more
