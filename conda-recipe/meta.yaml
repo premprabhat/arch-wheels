@@ -1,16 +1,21 @@
 package:
     name: arch
     version: 4.7.0
+
 source:
     version: 4.7.0
     git_url: 'https://github.com/bashtage/arch.git'
+
 build:
     number: 0
+
 requirements:
     build:
         - {{ compiler('c') }}    
+    host:
         - python
         - setuptools
+        - pip
         - cython
         - numpy
         - scipy
@@ -20,10 +25,12 @@ requirements:
         - {{ pin_compatible('numpy') }}
         - scipy
         - statsmodels        
+
 test:
     requires:
         - pytest
         - nose
+
 about:
     home: 'https://github.com/bashtage/arch'
     license: NCSA

@@ -6,12 +6,22 @@ then
     # for Mac OSX
     export CC=clang
     export CXX=clang++
+    export FC=gfortran
+    export F77=$FC
+    export F90=$FC
+    export F95=$FC
     export MACOSX_VERSION_MIN="10.9"
     export MACOSX_DEPLOYMENT_TARGET="${MACOSX_VERSION_MIN}"
     export CMAKE_OSX_DEPLOYMENT_TARGET="${MACOSX_VERSION_MIN}"
     export CFLAGS="${CFLAGS} -mmacosx-version-min=${MACOSX_VERSION_MIN}"
     export CXXFLAGS="${CXXFLAGS} -mmacosx-version-min=${MACOSX_VERSION_MIN}"
     export CXXFLAGS="${CXXFLAGS} -stdlib=libc++"
+    if [ ! -z "$CONDA_BUILD_SYSROOT" ]; then
+        export CMAKE_OSX_SYSROOT="${CONDA_BUILD_SYSROOT}"
+        export SDKROOT="${CONDA_BUILD_SYSROOT}"
+        export CFLAGS="${CFLAGS} -isysroot ${CONDA_BUILD_SYSROOT}"
+        export CXXFLAGS="${CXXFLAGS} -isysroot ${CONDA_BUILD_SYSROOT}"
+    fi
     export LDFLAGS="${LDFLAGS} -headerpad_max_install_names"
     export LDFLAGS="${LDFLAGS} -mmacosx-version-min=${MACOSX_VERSION_MIN}"
     export LDFLAGS="${LDFLAGS} -lc++"
@@ -22,6 +32,10 @@ then
     # for Linux
     export CC=gcc
     export CXX=g++
+    export FC=gfortran
+    export F77=$FC
+    export F90=$FC
+    export F95=$FC
     export CFLAGS="${CFLAGS}"
     # Boost wants to enable `float128` support on Linux by default.
     # However, we don't install `libquadmath` so it will fail to find
@@ -43,8 +57,12 @@ fi
 
 export CPPFLAGS="${CPPFLAGS} -I${PREFIX}/include"
 export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
-export CFLAGS="${CFLAGS} -m${ARCH}"
-export CXXFLAGS="${CXXFLAGS} -m${ARCH}"
+if [ ! -z "$ARCH" ]; then
+    export CFLAGS="${CFLAGS} -m${ARCH}"
+    export CXXFLAGS="${CXXFLAGS} -m${ARCH}"
+fi
+export CFLAGS="${CFLAGS} -fPIC"
+export CXXFLAGS="${CXXFLAGS} -fPIC"
 
 # Python command to install
-$PYTHON setup.py install --single-version-externally-managed --record=record.txt
+python setup.py install --single-version-externally-managed --record=record.txt
