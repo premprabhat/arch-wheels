@@ -8,15 +8,16 @@ build:
     number: 0
 requirements:
     build:
+        - {{ compiler('c') }}    
         - python
         - setuptools
         - cython
-        - 'numpy x.x'
+        - numpy
         - scipy
         - statsmodels
     run:
         - python
-        - 'numpy x.x'
+        - {{ pin_compatible('numpy') }}
         - scipy
         - statsmodels        
 test:

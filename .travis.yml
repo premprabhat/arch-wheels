@@ -2,8 +2,8 @@ env:
   global:
       # Set these values
       - BUILD_COMMIT="4.7.0" # "master"
-      - PYPI_UPLOAD=false # true or false
-      - TESTPYPI_UPLOAD=true
+      - PYPI_UPLOAD=true # true or false
+      - TESTPYPI_UPLOAD=false
       - CONDA_BUILD=true
       - CONDA_UPLOAD=true
       # These values should not usually change
