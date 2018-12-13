@@ -1,20 +1,25 @@
+{% set name = "arch" %}
+{% set version = "4.7.0" %}
+{% set sha = "bf95798dcbf2bb44b6455fd9ce189f8f06208e66e844d18725d520b2bb9f0818" %}
 package:
-    name: arch
-    version: 4.7.0
+    name: {{ name|lower }}
+    version:  {{ version }}
 
 source:
     version: 4.7.0
-    git_url: 'https://github.com/bashtage/arch.git'
+    url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: {{ sha }}
+    # url: https://github.com/bashtage/{{ name }}/archive/{{ version }}.tar.gz
 
 build:
     number: 0
+    script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
     build:
         - {{ compiler('c') }}    
     host:
         - python
-        - setuptools
         - pip
         - cython
         - numpy
@@ -22,6 +27,7 @@ requirements:
         - statsmodels
     run:
         - python
+        - cython
         - {{ pin_compatible('numpy') }}
         - scipy
         - statsmodels        
@@ -30,6 +36,8 @@ test:
     requires:
         - pytest
         - nose
+    imports:
+        - arch        
 
 about:
     home: 'https://github.com/bashtage/arch'
