@@ -5,9 +5,9 @@ os: Visual Studio 2015
 
 environment:
   global:
-    BUILD_COMMIT: "4.6.0" # master
+    BUILD_COMMIT: "4.7.0" # master
     PYPI_UPLOAD: "false"
-    TESTPYPI_UPLOAD: "false" # "true" or "false"
+    TESTPYPI_UPLOAD: "true+/" # "true" or "false"
     CONDA_BUILD: "true"
     CONDA_UPLOAD: "true"
     PACKAGE_NAME: arch
