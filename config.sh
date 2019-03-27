@@ -19,5 +19,5 @@ function pip_opts {
 function run_tests {
     # Runs tests on installed distribution from an empty directory
     python --version
-    MPLBACKEND="agg" pytest --pyargs arch.tests
+    MPLBACKEND="agg" python -c "import arch;arch.test()"
 }

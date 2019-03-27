@@ -1,12 +1,12 @@
 {% set name = "arch" %}
-{% set version = "4.7.0" %}
+{% set version = "4.7.99" %}
 {% set sha = "bf95798dcbf2bb44b6455fd9ce189f8f06208e66e844d18725d520b2bb9f0818" %}
 package:
     name: {{ name|lower }}
     version:  {{ version }}
 
 source:
-    version: 4.7.0
+    version: 4.7.99
     url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha }}
     # url: https://github.com/bashtage/{{ name }}/archive/{{ version }}.tar.gz
