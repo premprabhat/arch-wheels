@@ -3,5 +3,6 @@ set MKL_NUM_THREADS=1
 set NUMEXPR_NUM_THREADS=1
 set OMP_NUM_THREADS=1
 set OPENBLAS_NUM_THREADS=1
+set MPLBACKEND=agg
 
-pytest --pyargs arch
+python -c "import arch; arch.test()"

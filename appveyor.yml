@@ -5,13 +5,14 @@ os: Visual Studio 2015
 
 environment:
   global:
-    BUILD_COMMIT: "master" # "master" or "4.8.0"
+    BUILD_COMMIT: "4.8.0" # "master" or "4.8.0"
     PYPI_UPLOAD: "false"
-    TESTPYPI_UPLOAD: "false" # "true" or "false"
-    CONDA_BUILD: "false"
+    TESTPYPI_UPLOAD: "true" # "true" or "false"
+    CONDA_BUILD: "true"
     CONDA_UPLOAD: "false"
     PACKAGE_NAME: arch
     CONDA_NUMPY_VERSION: 1.16
+    MPLBACKEND: agg
   TESTPYPI_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   TESTPYPI_PASSWORD:
@@ -71,7 +72,7 @@ test_script:
 
   - mkdir _for_testing
   - cd _for_testing
-  - pytest --pyargs arch
+  - python -c "import arch; arch.test()"
   
 on_success:
   - echo "Upload here"
