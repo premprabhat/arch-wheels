@@ -12,8 +12,8 @@ matrix:
 environment:
   global:
     BUILD_COMMIT: "4.8.1" # "master" or "4.8.0"
-    PYPI_UPLOAD: "false"
-    TESTPYPI_UPLOAD: "true" # "true" or "false"
+    PYPI_UPLOAD: "true"
+    TESTPYPI_UPLOAD: "false" # "true" or "false"
     CONDA_BUILD: "false"
     CONDA_UPLOAD: "false"
     PACKAGE_NAME: arch
