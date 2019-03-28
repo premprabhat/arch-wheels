@@ -1,18 +1,19 @@
 skip_tags: true
 clone_depth: 50
 
-os: Visual Studio 2015
-
 environment:
   global:
-    BUILD_COMMIT: "4.8.0" # "master" or "4.8.0"
+    BUILD_COMMIT: "4.8.0"
     PYPI_UPLOAD: "false"
     TESTPYPI_UPLOAD: "true" # "true" or "false"
     CONDA_BUILD: "true"
     CONDA_UPLOAD: "false"
     PACKAGE_NAME: arch
-    CONDA_NUMPY_VERSION: 1.16
-    MPLBACKEND: agg
+    CONDA_NUMPY_VERSION: "1.16"
+    MIN_NUMPY_VER: "1.15"
+    BUILD_DEPENDS: "cython pandas statsmodels patsy scipy"
+    TEST_DEPENDS: "cython pandas statsmodels patsy scipy matplotlib"
+    PIP_PACKAGES: "cached_property pytest"
   TESTPYPI_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   TESTPYPI_PASSWORD:
@@ -25,59 +26,91 @@ environment:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   ANACONDA_TOKEN:
     secure: sGNIyeEysSzD4W0Q9SMB2sK69a5hiM6qGIGPHhtCH9vpGrlSN7nOXr/zbg4X+vvK
-  matrix:
-    - PY_VER: 2.7
-      PYTHON_ARCH: "x86"
-    - PY_VER: 2.7
-      PYTHON_ARCH: "x86_64"
-    - PY_VER: 3.5
-      PYTHON_ARCH: "x86_64"
-    - PY_VER: 3.5
-      PYTHON_ARCH: "x86"
-    - PY_VER: 3.6
-      PYTHON_ARCH: "x86_64"
-    - PY_VER: 3.6
-      PYTHON_ARCH: "x86"
-    - PY_VER: 3.7
-      PYTHON_ARCH: "x86_64"
-    - PY_VER: 3.7
-      PYTHON_ARCH: "x86"
 
+  matrix:
+    - PYTHON: "C:\\Miniconda35"
+      PYTHON_VERSION: "3.5"
+      PYTHON_ARCH: "32"
+    - PYTHON: "C:\\Miniconda35-x64"
+      PYTHON_VERSION: "3.5"
+      PYTHON_ARCH: "64"
+    - PYTHON: "C:\\Miniconda36"
+      PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "32"
+    - PYTHON: "C:\\Miniconda36-x64"
+      PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "64"
+    - PYTHON: "C:\\Miniconda37"
+      PYTHON_VERSION: "3.7"
+      PYTHON_ARCH: "32"
+    - PYTHON: "C:\\Miniconda37-x64"
+      PYTHON_VERSION: "3.7"
+      PYTHON_ARCH: "64"
+    - PYTHON: "C:\\Miniconda"
+      PYTHON_VERSION: "2.7"
+      PYTHON_ARCH: "32"
+    - PYTHON: "C:\\Miniconda-x64"
+      PYTHON_VERSION: "2.7"
+      PYTHON_ARCH: "64"
+
+# We always use a 64-bit machine, but can build x86 distributions
+# with the TARGET_ARCH variable.
 platform:
     - x64
 
+os:
+    - Visual Studio 2015
+
+matrix:
+    fast_finish: false
+
+install:
+    - echo "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 > "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\amd64/vcvars64.bat"
+    # Install miniconda and fix headers
+    - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PYTHON%\Library\bin;%PATH%
+    - conda info
+    - conda update conda -y
+
+    # Check that we have the expected version and architecture for Python
+    - python --version
+    - python -c "import struct; print(struct.calcsize('P') * 8)"
+
+    # clone a origsel/python-appveyor-demo
+    # this repo includes a simple package to test appveyor
+    - git clone git://github.com/bashtage/arch.git
+    - git fetch --all --tags
+
 build_script:
-  - git submodule update --init --recursive
-  - ps: Start-FileDownload "https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-$env:PYTHON_ARCH.exe" C:\Miniconda.exe; echo "Finished downloading miniconda"
-  - cmd: C:\Miniconda.exe /S /D=C:\Py
-  - SET PATH=C:\Py;C:\Py\Scripts;C:\Py\Library\bin;%PATH%
-  - echo "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 > "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\amd64/vcvars64.bat"
-  - conda config --set always_yes yes
-  - conda update conda --quiet
-  - conda create -n arch-build python=%PY_VER% numpy cython nose pytest wheel scipy statsmodels --quiet
-  - activate arch-build
-  - python -m pip install -U pip
-  - pip install cached_property
-  - set "WHEELBUILDER_DIR=%cd%"
+    # Install build requirements
+    - conda install --yes numpy>=%MIN_NUMPY_VER% %BUILD_DEPENDS%
+    - python -m pip install --upgrade pip
+    - pip install %PIP_PACKAGES% --upgrade
+
+    # build wheel:
+    - set "MULTIBUILD_DIR=%cd%"
+    - cd arch
+    - git checkout %BUILD_COMMIT%
+    - python setup.py bdist_wheel
+    - ls dist/*
+    - set "WHEELBUILDER_DIR=%cd%\dist"
+    - echo %WHEELBUILDER_DIR%
 
 test_script:
-  - echo %cd%
-  - cd arch
-  - git checkout %BUILD_COMMIT%
-  - python setup.py bdist_wheel
-  - set "REPO_DIR=%cd%"
-  - cd ..
+    # create test env
+    - conda create --yes -n test_env python=%PYTHON_VERSION% numpy>=%MIN_NUMPY_VER% %TEST_DEPENDS%
+    - activate test_env
+    - pip install %PIP_PACKAGES% --upgrade
 
-  - pip install --pre --no-index --find-links %REPO_DIR%\dist\ %PACKAGE_NAME%
+    # install from wheel
+    - pip install --no-index --find-links dist/ %PACKAGE_NAME%
 
-  - mkdir _for_testing
-  - cd _for_testing
-  - python -c "import arch; arch.test()"
-  
+    # run tests from install wheel
+    - cd ..
+    - python -c "import arch; arch.test()"
+
 on_success:
   - echo "Upload here"
-  - cd %WHEELBUILDER_DIR%\
-  - echo %cd%
+  - cd %MULTIBUILD_DIR%
   - pip install twine
   - twine-upload.bat
-  - build-conda.bat
+  - echo build-conda.bat
