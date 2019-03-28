@@ -2,9 +2,9 @@ env:
   global:
       # Set these values
       - BUILD_COMMIT="4.8.0" # "4.8.0" or  "master"
-      - PYPI_UPLOAD=false # true or false
-      - TESTPYPI_UPLOAD=true
-      - CONDA_BUILD=true
+      - PYPI_UPLOAD=true # true or false
+      - TESTPYPI_UPLOAD=false
+      - CONDA_BUILD=false
       - CONDA_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"

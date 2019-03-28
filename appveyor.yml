@@ -4,9 +4,9 @@ clone_depth: 50
 environment:
   global:
     BUILD_COMMIT: "4.8.0"
-    PYPI_UPLOAD: "false"
-    TESTPYPI_UPLOAD: "true" # "true" or "false"
-    CONDA_BUILD: "true"
+    PYPI_UPLOAD: "true"
+    TESTPYPI_UPLOAD: "false" # "true" or "false"
+    CONDA_BUILD: "false"
     CONDA_UPLOAD: "false"
     PACKAGE_NAME: arch
     CONDA_NUMPY_VERSION: "1.16"
@@ -113,4 +113,4 @@ on_success:
   - cd %MULTIBUILD_DIR%
   - pip install twine
   - twine-upload.bat
-  - echo build-conda.bat
+  - build-conda.bat
