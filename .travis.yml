@@ -10,7 +10,7 @@ env:
       - REPO_DIR="arch"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
-      - BUILD_DEPENDS="Cython numpy cached_property wheel"
+      - BUILD_DEPENDS="Cython numpy wheel"
       - TEST_DEPENDS="numpy scipy pandas pytest nose cached_property wheel"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
@@ -38,6 +38,10 @@ matrix:
     - os: osx
       language: generic
       env:
+        - MB_PYTHON_VERSION=2.7
+    - os: osx
+      language: generic
+      env:
         - MB_PYTHON_VERSION=3.5
     - os: osx
       language: generic
@@ -59,6 +63,22 @@ matrix:
       env:
         - MB_PYTHON_VERSION=3.7
         - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - UNICODE_WIDTH=16
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - PLAT=i686
+        - UNICODE_WIDTH=16
 
 before_install:
     - source multibuild/common_utils.sh
