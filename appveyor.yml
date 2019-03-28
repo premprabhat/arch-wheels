@@ -4,10 +4,10 @@ clone_depth: 50
 environment:
   global:
     BUILD_COMMIT: "4.8.0"
-    PYPI_UPLOAD: "true"
+    PYPI_UPLOAD: "false"
     TESTPYPI_UPLOAD: "false" # "true" or "false"
     CONDA_BUILD: "false"
-    CONDA_UPLOAD: "false"
+    CONDA_UPLOAD: "true"
     PACKAGE_NAME: arch
     CONDA_NUMPY_VERSION: "1.16"
     MIN_NUMPY_VER: "1.15"
@@ -40,18 +40,21 @@ environment:
     - PYTHON: "C:\\Miniconda36-x64"
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
+      CONDA_BUILD: "true"
     - PYTHON: "C:\\Miniconda37"
       PYTHON_VERSION: "3.7"
       PYTHON_ARCH: "32"
     - PYTHON: "C:\\Miniconda37-x64"
       PYTHON_VERSION: "3.7"
       PYTHON_ARCH: "64"
+      CONDA_BUILD: "true"
     - PYTHON: "C:\\Miniconda"
       PYTHON_VERSION: "2.7"
       PYTHON_ARCH: "32"
     - PYTHON: "C:\\Miniconda-x64"
       PYTHON_VERSION: "2.7"
       PYTHON_ARCH: "64"
+      CONDA_BUILD: "true"
 
 # We always use a 64-bit machine, but can build x86 distributions
 # with the TARGET_ARCH variable.
