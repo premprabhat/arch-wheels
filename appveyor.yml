@@ -12,10 +12,10 @@ matrix:
 environment:
   global:
     BUILD_COMMIT: "4.8.1" # "master" or "4.8.0"
-    PYPI_UPLOAD: "true"
+    PYPI_UPLOAD: "false"
     TESTPYPI_UPLOAD: "false" # "true" or "false"
-    CONDA_BUILD: "false"
-    CONDA_UPLOAD: "false"
+    CONDA_BUILD: "true"
+    CONDA_UPLOAD: "true"
     PACKAGE_NAME: arch
     CONDA_NUMPY_VERSION: "1.16"
     MPLBACKEND: agg
@@ -91,4 +91,4 @@ on_success:
   - cd %WHEELBUILDER_DIR%\
   - pip install twine
   - call twine-upload.bat
-  - call build-conda.bat
+  # - call build-conda.bat
