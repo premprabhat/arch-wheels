@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-if [[ ${PLAT} == "x86_64" && ${UNICODE_WIDTH} == "32" && ${CONDA_BUILD} == true ]]; then
+echo "Inside build-conda.sh"
+
+if [[ ${PLAT} == "x86_64" && ${UNICODE_WIDTH} == "32" && ${CONDA_BUILD} == true ]] || [[ ${TRAVIS_OS_NAME} == "osx" ]]; then
     if [[ ${TRAVIS_OS_NAME} == "osx" ]]; then
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda3.sh -nv;
     fi
