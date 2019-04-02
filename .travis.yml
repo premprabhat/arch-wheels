@@ -93,8 +93,8 @@ install:
 
 script:
     - install_run $PLAT
-    - source build-sdist.sh
     - source build-conda.sh
+    - source build-sdist.sh
 
 after_success:
     # Upload wheels/sdist to PyPI

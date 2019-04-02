@@ -18,7 +18,6 @@ environment:
     CONDA_UPLOAD: "true"
     PACKAGE_NAME: arch
     CONDA_NUMPY_VERSION: "1.16"
-    MPLBACKEND: agg
     MIN_NUMPY_VER: "1.15"
     PIP_PACKAGES: "cached_property pytest"
   TESTPYPI_USERNAME:
@@ -49,10 +48,6 @@ environment:
     - PY_VER: "3.5"
       PYTHON_ARCH: "x86"
       CONDA_NUMPY_VERSION: "1.15"
-    - PY_VER: "2.7"
-      PYTHON_ARCH: "x86"
-    - PY_VER: "2.7"
-      PYTHON_ARCH: "x86_64"
 
 
 install:
@@ -91,4 +86,4 @@ on_success:
   - cd %WHEELBUILDER_DIR%\
   - pip install twine
   - call twine-upload.bat
-  # - call build-conda.bat
+
