@@ -1,17 +1,17 @@
 env:
   global:
       # Set these values
-      - BUILD_COMMIT="master"
-      - PYPI_UPLOAD=false  # true or false
+      - BUILD_COMMIT="4.9.0" # "master" or "x.y.z"
+      - PYPI_UPLOAD=true  # true or false
       - TESTPYPI_UPLOAD=false
-      - CONDA_BUILD=true
-      - CONDA_UPLOAD=true
+      - CONDA_BUILD=false
+      - CONDA_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
-      - BUILD_DEPENDS="Cython numpy wheel"
-      - TEST_DEPENDS="numpy scipy pandas pytest nose cached_property wheel"
+      - BUILD_DEPENDS="Cython numpy wheel property_cached"
+      - TEST_DEPENDS="numpy scipy pandas pytest nose property_cached wheel"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
       - CONDA_NUMPY_VERSION=1.16
