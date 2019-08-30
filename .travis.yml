@@ -1,7 +1,7 @@
 env:
   global:
       # Set these values
-      - BUILD_COMMIT="4.8.1" # "4.8.0" or  "master"
+      - BUILD_COMMIT="master"
       - PYPI_UPLOAD=false  # true or false
       - TESTPYPI_UPLOAD=false
       - CONDA_BUILD=true
@@ -20,7 +20,7 @@ env:
 language: python
 python: 3.6
 sudo: required
-dist: trusty
+dist: bionic
 services: docker
 
 matrix:
@@ -38,10 +38,6 @@ matrix:
     - os: osx
       language: generic
       env:
-        - MB_PYTHON_VERSION=2.7
-    - os: osx
-      language: generic
-      env:
         - MB_PYTHON_VERSION=3.5
         - CONDA_NUMPY_VERSION=1.15
     - os: osx
@@ -64,22 +60,6 @@ matrix:
       env:
         - MB_PYTHON_VERSION=3.7
         - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - UNICODE_WIDTH=16
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-        - UNICODE_WIDTH=16
 
 before_install:
     - source multibuild/common_utils.sh

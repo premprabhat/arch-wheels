@@ -11,7 +11,7 @@ matrix:
 
 environment:
   global:
-    BUILD_COMMIT: "4.8.1" # "master" or "4.8.0"
+    BUILD_COMMIT: "master" # "master" or "4.8.0"
     PYPI_UPLOAD: "false"
     TESTPYPI_UPLOAD: "false" # "true" or "false"
     CONDA_BUILD: "true"
@@ -86,4 +86,3 @@ on_success:
   - cd %WHEELBUILDER_DIR%\
   - pip install twine
   - call twine-upload.bat
-
