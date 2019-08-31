@@ -1,6 +1,6 @@
 {% set name = "arch" %}
-{% set version = "4.9.0" %}
-{% set sha = "e60b7ba8e7b9da35dc4e99b4ab359ead28c760e31a93b8c222d670b187174a15" %}
+{% set version = "4.9.1" %}
+{% set sha = "041f6bde10927c45fd0652d145b0476781d480b0347cf857aa900f57e2cdfaa3" %}
 package:
     name: {{ name|lower }}
     version:  {{ version }}

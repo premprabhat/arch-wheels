@@ -11,11 +11,11 @@ matrix:
 
 environment:
   global:
-    BUILD_COMMIT: "4.9.0" # "master" or "4.8.0"
+    BUILD_COMMIT: "4.9.1" # "master" or "4.8.0"
     PYPI_UPLOAD: "true"
-    TESTPYPI_UPLOAD: "false" # "true" or "false"
-    CONDA_BUILD: "false"
-    CONDA_UPLOAD: "false"
+    TESTPYPI_UPLOAD: "true" # "true" or "false"
+    CONDA_BUILD: "true"
+    CONDA_UPLOAD: "true"
     PACKAGE_NAME: arch
     CONDA_NUMPY_VERSION: "1.16"
     MIN_NUMPY_VER: "1.15"
