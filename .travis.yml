@@ -4,8 +4,8 @@ env:
       - BUILD_COMMIT="4.9.1" # "master" or "x.y.z"
       - PYPI_UPLOAD=true  # true or false
       - TESTPYPI_UPLOAD=true
-      - CONDA_BUILD=true
-      - CONDA_UPLOAD=true
+      - CONDA_BUILD=false
+      - CONDA_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"
       - PLAT=x86_64

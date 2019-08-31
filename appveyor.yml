@@ -14,8 +14,8 @@ environment:
     BUILD_COMMIT: "4.9.1" # "master" or "4.8.0"
     PYPI_UPLOAD: "true"
     TESTPYPI_UPLOAD: "true" # "true" or "false"
-    CONDA_BUILD: "true"
-    CONDA_UPLOAD: "true"
+    CONDA_BUILD: "false"
+    CONDA_UPLOAD: "false"
     PACKAGE_NAME: arch
     CONDA_NUMPY_VERSION: "1.16"
     MIN_NUMPY_VER: "1.15"
