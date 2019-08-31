@@ -4,10 +4,8 @@ if "%CONDA_BUILD%" == "true" (
     set CPU_COUNT=2
     set PYTHONUNBUFFERED=1
 
-    conda install -c conda-forge vs2008_express_vc_python_patch
-    call setup_x64
-
-    conda install conda-build anaconda-client conda-verify
+    deactivate
+    conda install anaconda-client conda-verify
     if "%CONDA_UPLOAD%" == "true" (
         conda config --set anaconda_upload yes
     ) else (
