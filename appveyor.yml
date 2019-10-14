@@ -6,11 +6,11 @@ matrix:
 
 environment:
   global:
-    BUILD_COMMIT: "4.9.1" # "master" or "4.8.0"
+    BUILD_COMMIT: "master" # "master" or "4.8.0"
     PYPI_UPLOAD: "false"
     TESTPYPI_UPLOAD: "false" # "true" or "false"
-    CONDA_BUILD: "true"
-    CONDA_UPLOAD: "true"
+    CONDA_BUILD: "false"
+    CONDA_UPLOAD: "false"
     REPO_DIR: arch
     PACKAGE_NAME: arch
     BUILD_DEPENDS: "cython numpy scipy statsmodels pandas property_cached"
