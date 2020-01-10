@@ -9,13 +9,11 @@ environment:
     BUILD_COMMIT: "4.11" # "master" or "4.8.0"
     PYPI_UPLOAD: "true"
     TESTPYPI_UPLOAD: "true" # "true" or "false"
-    CONDA_BUILD: "false"
-    CONDA_UPLOAD: "false"
     REPO_DIR: arch
     PACKAGE_NAME: arch
-    BUILD_DEPENDS: "cython numpy scipy statsmodels pandas property_cached"
+    BUILD_DEPENDS: "cython numpy scipy property_cached"
+    EXTRA_BUILD_DEPENDS: "pandas statsmodels"
     TEST_DEPENDS: "cython numpy scipy statsmodels pandas nose pytest property_cached"
-    CONDA_NUMPY_VERSION: 1.16
   TESTPYPI_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   TESTPYPI_PASSWORD:
@@ -24,32 +22,40 @@ environment:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   PYPI_PASSWORD:
     secure: ufGrse+xSx3blI6bh9bnSg==
-  ANACONDA_USERNAME:
-    secure: 9D67F9Bcy8PITwg1cezOgw==
-  ANACONDA_TOKEN:
-    secure: 36nPiNN0128SGPNp1hya5eIJUDBCcKV1okGuHTfwdvmgCQohx8i35hFmdjQl0WHf
 
   matrix:
-    - PYTHON: "C:\\Miniconda35"
-      PYTHON_VERSION: "3.5"
-      PYTHON_ARCH: "32"
-      CONDA_NUMPY_VERSION: 1.15
-    - PYTHON: "C:\\Miniconda35-x64"
-      PYTHON_VERSION: "3.5"
-      PYTHON_ARCH: "64"
-      CONDA_NUMPY_VERSION: 1.15
-    - PYTHON: "C:\\Miniconda36"
-      PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "32"
-    - PYTHON: "C:\\Miniconda36-x64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "64"
-    - PYTHON: "C:\\Miniconda37"
-      PYTHON_VERSION: "3.7"
-      PYTHON_ARCH: "32"
-    - PYTHON: "C:\\Miniconda37-x64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_ARCH: "64"
+    - PYTHON: C:\Python38-x64
+      PYTHON_VERSION: 3.8
+      PYTHON_ARCH: 64
+
+    - PYTHON: C:\Python37-x64
+      PYTHON_VERSION: 3.7
+      PYTHON_ARCH: 64
+
+    - PYTHON: C:\Python36-x64
+      PYTHON_VERSION: 3.6
+      PYTHON_ARCH: 64
+
+    - PYTHON: C:\Python35-x64
+      PYTHON_VERSION: 3.5
+      PYTHON_ARCH: 64
+
+    - PYTHON: C:\Python38
+      PYTHON_VERSION: 3.8
+      PYTHON_ARCH: 32
+
+    - PYTHON: C:\Python37
+      PYTHON_VERSION: 3.7
+      PYTHON_ARCH: 32
+
+    - PYTHON: C:\Python36
+      PYTHON_VERSION: 3.6
+      PYTHON_ARCH: 32
+
+    - PYTHON: C:\Python35
+      PYTHON_VERSION: 3.5
+      PYTHON_ARCH: 32
+
 
 
 # We always use a 64-bit machine, but can build x86 distributions
@@ -59,31 +65,29 @@ platform:
 
 install:
     - git submodule update --init --recursive
-    # Install miniconda and fix headers
-    - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PYTHON%\Library\bin;%PATH%
-    - conda config --set always_yes yes
-    - conda update conda
-    - conda clean --packages
-    - conda update --all
-    - conda install conda-build
-    - conda info
+    - git fetch --all --tags
 
+    # Install new Python if necessary
+    - ps: .\multibuild\install_python.ps1
+
+    # Set path
+    - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
 
     # Check that we have the expected version and architecture for Python
-    - python -m pip install --upgrade pip
     - python --version
+    - python -m pip install --upgrade pip wheel
     - python -c "import struct; print(struct.calcsize('P') * 8)"
 
     # clone a origsel/python-appveyor-demo
     # this repo includes a simple package to test appveyor
     - set "WHEELBUILDER_DIR=%cd%"
     - cd arch
-    - git fetch --all
     - cd ..
 
 build_script:
     # Install build requirements
     - pip install %BUILD_DEPENDS%
+    - pip install %EXTRA_BUILD_DEPENDS%
 
     # build wheel:
     - cd %REPO_DIR%
@@ -93,9 +97,6 @@ build_script:
 
 test_script:
     # create test env
-    - conda create --yes -n test_env python=%PYTHON_VERSION%
-    - activate test_env
-    - python -m pip install --upgrade pip
     - pip install %TEST_DEPENDS%
 
     # install from wheel
@@ -105,11 +106,9 @@ test_script:
     - mkdir _for_testing
     - cd _for_testing
     - python -c "import arch; arch.test()"
-    - deactivate
 
 on_success:
     - echo "Upload here"
     - cd %WHEELBUILDER_DIR%\
     - pip install twine
     - call twine-upload.bat
-    - call build-conda.bat
