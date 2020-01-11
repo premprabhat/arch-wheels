@@ -24,6 +24,10 @@ if [[ ${PLAT} == "x86_64" && ${UNICODE_WIDTH} == "32" && ${CONDA_BUILD} == true 
     fi
     echo conda build ./conda-recipe
     conda build --user ${ANACONDA_USERNAME} --token ${ANACONDA_TOKEN} ./conda-recipe
+    exit 0
 else
+  if [ -n "${CONDA_BUILD+1}" ]; then
     echo "conda build is disabled"
+    exit 0
+  fi
 fi

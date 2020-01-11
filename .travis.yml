@@ -27,6 +27,15 @@ matrix:
   include:
     - os: linux
       env:
+        - CONDA_BUILD=true
+        - CONDA_UPLOAD=true
+    - os: osx
+      language: generic
+      env:
+        - CONDA_BUILD=true
+        - CONDA_UPLOAD=true
+    - os: linux
+      env:
         - MB_PYTHON_VERSION=3.5
         - CONDA_NUMPY_VERSION=1.15
     - os: linux
@@ -73,6 +82,7 @@ matrix:
         - PLAT=i686
 
 before_install:
+    - source build-conda.sh
     - source multibuild/common_utils.sh
     - source multibuild/travis_steps.sh
     - before_install
