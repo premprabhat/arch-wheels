@@ -1,6 +1,6 @@
 {% set name = "arch" %}
-{% set version = "4.10.0" %}
-{% set sha = "0682d4953d36f2326a666f55420ec19337a885b427e1b6fb89546a49b8c8ac90" %}
+{% set version = "4.11" %}
+{% set sha = "a3d5cd9086e7c44638286fbe46a4688a3668ab79400a1712c3ce43490be0c3bb" %}
 package:
     name: {{ name|lower }}
     version:  {{ version }}
@@ -21,7 +21,7 @@ requirements:
         - python
         - pip
         - cython>=0.29
-        - numpy x.x
+        - numpy>=1.14
         - scipy>=1
         - statsmodels>=0.9
         - wheel

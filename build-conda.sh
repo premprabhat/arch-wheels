@@ -22,8 +22,8 @@ if [[ ${PLAT} == "x86_64" && ${UNICODE_WIDTH} == "32" && ${CONDA_BUILD} == true 
     else
         conda config --set anaconda_upload no
     fi
-    echo conda build --python ${MB_PYTHON_VERSION} --numpy ${CONDA_NUMPY_VERSION} ./conda-recipe
-    conda build --python ${MB_PYTHON_VERSION} --numpy ${CONDA_NUMPY_VERSION} --user ${ANACONDA_USERNAME} --token ${ANACONDA_TOKEN} ./conda-recipe
+    echo conda build ./conda-recipe
+    conda build --user ${ANACONDA_USERNAME} --token ${ANACONDA_TOKEN} ./conda-recipe
 else
     echo "conda build is disabled"
 fi

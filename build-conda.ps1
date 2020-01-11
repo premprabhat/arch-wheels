@@ -1,18 +1,24 @@
-if "%CONDA_BUILD%" == "true" (
-    :: Needed for building extensions in python2.7 x64 with cmake.
-    :: Since python version and arch is not known at this point, install it everywhere.
-    set CPU_COUNT=2
-    set PYTHONUNBUFFERED=1
+if ($env:CONDA_BUILD -eq "true") {
+    $env:CPU_COUNT=2
+    $env:PYTHONUNBUFFERED=1
 
-    deactivate
-    conda install anaconda-client conda-verify
-    if "%CONDA_UPLOAD%" == "true" (
+    curl -fsS -o c:\Miniconda.exe "https://repo.continuum.io/miniconda/Miniconda%PY_MAJOR_VER%-latest-Windows-%PYTHON_ARCH%.exe"
+    Start-Process -Wait C:\Miniconda.exe /S /D=C:\Py
+    $env:Path ="C:\Py;C:\Py\Scripts;C:\Py\Library\bin;" + $env:Path
+    conda config --set always_yes yes
+    conda update conda --quiet
+    conda install anaconda-client conda-verify conda-build
+    if ($env:CONDA_UPLOAD -eq "true") {
         conda config --set anaconda_upload yes
-    ) else (
+    }
+    else
+    {
         conda config --set anaconda_upload no
-    )
-    echo conda build --python %PYTHON_VERSION% --numpy %CONDA_NUMPY_VERSION% ./conda-recipe
-    conda build --python %PYTHON_VERSION% --numpy %CONDA_NUMPY_VERSION% --user %ANACONDA_USERNAME% --token %ANACONDA_TOKEN% ./conda-recipe
-) else (
+    }
+    echo conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe
+    conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe
+}
+else
+{
     echo "conda build is disabled"
-)
+}
