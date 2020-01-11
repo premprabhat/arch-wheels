@@ -14,6 +14,7 @@ environment:
     BUILD_DEPENDS: "cython numpy scipy property_cached"
     EXTRA_BUILD_DEPENDS: "pandas statsmodels"
     TEST_DEPENDS: "cython numpy scipy statsmodels pandas nose pytest property_cached"
+    CONDA_BUILD: "skip"
   TESTPYPI_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   TESTPYPI_PASSWORD:
@@ -22,8 +23,15 @@ environment:
     secure: 9D67F9Bcy8PITwg1cezOgw==
   PYPI_PASSWORD:
     secure: ufGrse+xSx3blI6bh9bnSg==
+  ANACONDA_USERNAME:
+    secure: 9D67F9Bcy8PITwg1cezOgw==
+  ANACONDA_TOKEN:
+    secure: 36nPiNN0128SGPNp1hya5eIJUDBCcKV1okGuHTfwdvmgCQohx8i35hFmdjQl0WHf
 
   matrix:
+    - CONDA_BUILD: "true"
+      CONDA_UPLOAD: "true"
+
     - PYTHON: C:\Python38-x64
       PYTHON_VERSION: 3.8
       PYTHON_ARCH: 64
@@ -57,7 +65,6 @@ environment:
       PYTHON_ARCH: 32
 
 
-
 # We always use a 64-bit machine, but can build x86 distributions
 # with the TARGET_ARCH variable.
 platform:
@@ -66,6 +73,8 @@ platform:
 install:
     - git submodule update --init --recursive
     - git fetch --all --tags
+
+    - ps: . .\build-conda.ps1
 
     # Install new Python if necessary
     - ps: .\multibuild\install_python.ps1

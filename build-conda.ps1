@@ -2,11 +2,11 @@ if ($env:CONDA_BUILD -eq "true") {
     $env:CPU_COUNT=2
     $env:PYTHONUNBUFFERED=1
 
-    curl -fsS -o c:\Miniconda.exe "https://repo.continuum.io/miniconda/Miniconda%PY_MAJOR_VER%-latest-Windows-%PYTHON_ARCH%.exe"
-    Start-Process -Wait C:\Miniconda.exe /S /D=C:\Py
+    wget "https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe" -OutFile "c:\Miniconda.exe"
+    Start-Process -Wait "C:\Miniconda.exe" "/S /D=C:\Py"
     $env:Path ="C:\Py;C:\Py\Scripts;C:\Py\Library\bin;" + $env:Path
     conda config --set always_yes yes
-    conda update conda --quiet
+    conda update conda
     conda install anaconda-client conda-verify conda-build
     if ($env:CONDA_UPLOAD -eq "true") {
         conda config --set anaconda_upload yes
@@ -15,10 +15,13 @@ if ($env:CONDA_BUILD -eq "true") {
     {
         conda config --set anaconda_upload no
     }
-    echo conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe
+    echo "conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe"
     conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe
+    echo "conda build is enabled. Exiting"
+    exit 0
 }
-else
+elseif ($env:CONDA_BUILD -eq "false")
 {
-    echo "conda build is disabled"
+    echo "conda build is disabled. Exiting"
+    exit 0
 }
