@@ -7,7 +7,7 @@ if ($env:CONDA_BUILD -eq "true") {
     $env:Path ="C:\Py;C:\Py\Scripts;C:\Py\Library\bin;" + $env:Path
     conda config --set always_yes yes
     conda update conda
-    conda install anaconda-client conda-verify conda-build
+    conda install anaconda-client conda-verify conda-build numpy
     if ($env:CONDA_UPLOAD -eq "true") {
         conda config --set anaconda_upload yes
     }
@@ -15,7 +15,7 @@ if ($env:CONDA_BUILD -eq "true") {
     {
         conda config --set anaconda_upload no
     }
-    echo "conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe"
+    echo "conda build ./conda-recipe"
     conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe
     echo "conda build is enabled. Exiting"
     exit 0

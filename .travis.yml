@@ -4,8 +4,6 @@ env:
       - BUILD_COMMIT="4.11" # "master" or "x.y.z"
       - PYPI_UPLOAD=true  # true or false
       - TESTPYPI_UPLOAD=true
-      - CONDA_BUILD=false
-      - CONDA_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"
       - PLAT=x86_64
@@ -14,7 +12,6 @@ env:
       - TEST_DEPENDS="numpy scipy pandas pytest nose property_cached wheel"
       - PLAT=x86_64
       - UNICODE_WIDTH=32
-      - CONDA_NUMPY_VERSION=1.16
       - SDIST=false
 
 language: python
@@ -37,7 +34,6 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.5
-        - CONDA_NUMPY_VERSION=1.15
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
@@ -51,7 +47,6 @@ matrix:
       language: generic
       env:
         - MB_PYTHON_VERSION=3.5
-        - CONDA_NUMPY_VERSION=1.15
     - os: osx
       language: generic
       env:
@@ -94,7 +89,6 @@ install:
 
 script:
     - install_run $PLAT
-    - source build-conda.sh
     - source build-sdist.sh
 
 after_success:
