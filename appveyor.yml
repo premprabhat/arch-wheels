@@ -6,9 +6,9 @@ matrix:
 
 environment:
   global:
-    BUILD_COMMIT: "4.11" # "master" or "4.8.0"
-    PYPI_UPLOAD: "true"
-    TESTPYPI_UPLOAD: "true" # "true" or "false"
+    BUILD_COMMIT: "4.11" # "master"
+    PYPI_UPLOAD: "true" # "true" or "false"
+    TESTPYPI_UPLOAD: "true"
     REPO_DIR: arch
     PACKAGE_NAME: arch
     BUILD_DEPENDS: "cython numpy scipy==1.3.2 property_cached"
@@ -30,7 +30,7 @@ environment:
 
   matrix:
     - CONDA_BUILD: "false"
-      CONDA_UPLOAD: "true"
+      CONDA_UPLOAD: "false"
 
     - PYTHON: C:\Python38-x64
       PYTHON_VERSION: 3.8
@@ -44,10 +44,6 @@ environment:
       PYTHON_VERSION: 3.6
       PYTHON_ARCH: 64
 
-    - PYTHON: C:\Python35-x64
-      PYTHON_VERSION: 3.5
-      PYTHON_ARCH: 64
-
     - PYTHON: C:\Python38
       PYTHON_VERSION: 3.8
       PYTHON_ARCH: 32
@@ -58,10 +54,6 @@ environment:
 
     - PYTHON: C:\Python36
       PYTHON_VERSION: 3.6
-      PYTHON_ARCH: 32
-
-    - PYTHON: C:\Python35
-      PYTHON_VERSION: 3.5
       PYTHON_ARCH: 32
 
 

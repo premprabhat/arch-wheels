@@ -20,8 +20,9 @@ if ($env:CONDA_BUILD -eq "true") {
     echo "conda build is enabled. Exiting"
     exit 0
 }
-elseif ($env:CONDA_BUILD -eq "false")
-{
+
+# Exit if false, use skip to avoid existing
+if ($env:CONDA_BUILD -eq "false") {
     echo "conda build is disabled. Exiting"
     exit 0
 }
