@@ -1,6 +1,6 @@
 {% set name = "arch" %}
-{% set version = "4.11" %}
-{% set sha = "a3d5cd9086e7c44638286fbe46a4688a3668ab79400a1712c3ce43490be0c3bb" %}
+{% set version = "4.12" %}
+{% set sha = "ee59b1176a3bdfb9604718f43bd6694c7351a44d931b5d6d3ad3697910595521" %}
 package:
     name: {{ name|lower }}
     version:  {{ version }}
@@ -25,14 +25,14 @@ requirements:
         - scipy>=1
         - statsmodels>=0.9
         - wheel
-        - pandas>=0.22
+        - pandas>=0.23
     run:
         - python
         - cython>=0.29
         - {{ pin_compatible('numpy') }}
         - scipy>=1
         - statsmodels>=0.9
-        - pandas>=0.22
+        - pandas>=0.23
 
 test:
     requires:
