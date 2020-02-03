@@ -1,7 +1,7 @@
 env:
   global:
       # Set these values
-      - BUILD_COMMIT="4.12" # "master" or "x.y.z"
+      - BUILD_COMMIT="4.13" # "master" or "x.y.z"
       - PYPI_UPLOAD=true  # true or false
       - TESTPYPI_UPLOAD=false
       # These values should not usually change

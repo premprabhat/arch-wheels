@@ -6,7 +6,7 @@ matrix:
 
 environment:
   global:
-    BUILD_COMMIT: "4.12" # "master"
+    BUILD_COMMIT: "4.13" # "master"
     PYPI_UPLOAD: "true" # "true" or "false"
     TESTPYPI_UPLOAD: "true"
     REPO_DIR: arch
@@ -29,9 +29,6 @@ environment:
     secure: 36nPiNN0128SGPNp1hya5eIJUDBCcKV1okGuHTfwdvmgCQohx8i35hFmdjQl0WHf
 
   matrix:
-    - CONDA_BUILD: "false"
-      CONDA_UPLOAD: "false"
-
     - PYTHON: C:\Python38-x64
       PYTHON_VERSION: 3.8
       PYTHON_ARCH: 64
@@ -55,6 +52,12 @@ environment:
     - PYTHON: C:\Python36
       PYTHON_VERSION: 3.6
       PYTHON_ARCH: 32
+
+    - CONDA_BUILD: "true"
+      CONDA_UPLOAD: "true"
+      PYTHON: C:\Python38-x64
+      PYTHON_VERSION: 3.8
+      PYTHON_ARCH: 64
 
 
 # We always use a 64-bit machine, but can build x86 distributions
