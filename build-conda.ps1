@@ -17,7 +17,16 @@ if ($env:CONDA_BUILD -eq "true") {
     }
     echo "conda build ./conda-recipe"
     conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe
+    echo "Building 32-bit"
+    echo $env:CONDA_FORCE_32BIT=1
+    $env:CONDA_FORCE_32BIT=1
+    echo "Set-Variable -Name ""CONDA_FORCE_32BIT"" -Visibility Public -Value 1"
+    Set-Variable -Name "CONDA_FORCE_32BIT" -Visibility Public -Value 1
+    echo "conda build ./conda-recipe"
+    conda build --user $env:ANACONDA_USERNAME --token $env:ANACONDA_TOKEN ./conda-recipe
     echo "conda build is enabled. Exiting"
+    $env:CONDA_FORCE_32BIT=0
+    Set-Variable -Name "CONDA_FORCE_32BIT" -Visibility Public -Value 0
     exit 0
 }
 
