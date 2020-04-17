@@ -6,9 +6,9 @@ matrix:
 
 environment:
   global:
-    BUILD_COMMIT: "4.13" # "master"
-    PYPI_UPLOAD: "true" # "true" or "false"
-    TESTPYPI_UPLOAD: "true"
+    BUILD_COMMIT: "master" # "master"
+    PYPI_UPLOAD: "false" # "true" or "false"
+    TESTPYPI_UPLOAD: "false"
     REPO_DIR: arch
     PACKAGE_NAME: arch
     BUILD_DEPENDS: "cython numpy scipy==1.3.2 property_cached"
