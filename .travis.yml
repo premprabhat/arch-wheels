@@ -2,7 +2,7 @@ env:
   global:
       # Set these values
       - BUILD_COMMIT="4.14" # "master" or "x.y.z"
-      - PYPI_UPLOAD=true  # true or false
+      - PYPI_UPLOAD=false  # true or false
       - TESTPYPI_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"
