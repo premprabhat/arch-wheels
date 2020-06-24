@@ -6,8 +6,8 @@ matrix:
 
 environment:
   global:
-    BUILD_COMMIT: "master" # "4.14"
-    PYPI_UPLOAD: "false" # "true" or "false"
+    BUILD_COMMIT: "4.15" # "4.14"
+    PYPI_UPLOAD: "true" # "true" or "false"
     TESTPYPI_UPLOAD: "false"
     REPO_DIR: arch
     PACKAGE_NAME: arch
@@ -54,7 +54,7 @@ environment:
       PYTHON_ARCH: 32
 
     - CONDA_BUILD: "true"
-      CONDA_UPLOAD: "false"
+      CONDA_UPLOAD: "true"
       PYTHON: C:\Python38-x64
       PYTHON_VERSION: 3.8
       PYTHON_ARCH: 64

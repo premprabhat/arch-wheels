@@ -1,8 +1,8 @@
 env:
   global:
       # Set these values
-      - BUILD_COMMIT="master" # "4.14" or "x.y.z"
-      - PYPI_UPLOAD=false  # true or false
+      - BUILD_COMMIT="4.15" # "master" or "x.y.z"
+      - PYPI_UPLOAD=true  # true or false
       - TESTPYPI_UPLOAD=false
       # These values should not usually change
       - REPO_DIR="arch"
@@ -24,12 +24,12 @@ matrix:
     - os: linux
       env:
         - CONDA_BUILD=true
-        - CONDA_UPLOAD=false
+        - CONDA_UPLOAD=true
     - os: osx
       language: generic
       env:
         - CONDA_BUILD=true
-        - CONDA_UPLOAD=false
+        - CONDA_UPLOAD=true
     - os: linux
       env:
         - MB_PYTHON_VERSION=3.6
