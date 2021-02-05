@@ -25,8 +25,8 @@ jobs:
     env:
       REPO_DIR: arch
       PKG_NAME: arch
-      BUILD_COMMIT: "master" # 4.16
-      PYPI_UPLOAD: false # true  # true or false
+      BUILD_COMMIT: "4.16" # master
+      PYPI_UPLOAD: true  # true or false
       TESTPYPI_UPLOAD: false
       UNICODE_WIDTH: 32
       MB_PYTHON_VERSION: ${{ matrix.python-version }}
