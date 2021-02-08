@@ -7,13 +7,13 @@ matrix:
 environment:
   global:
     BUILD_COMMIT: "4.16"
-    PYPI_UPLOAD: "true" # "true" or "false"
-    TESTPYPI_UPLOAD: "true"
+    PYPI_UPLOAD: "false" # "true" or "false"
+    TESTPYPI_UPLOAD: "false"
     REPO_DIR: arch
     PACKAGE_NAME: arch
-    BUILD_DEPENDS: "cython numpy scipy==1.3.2 property_cached"
+    BUILD_DEPENDS: "cython numpy==1.19.5 scipy==1.5.4 property_cached"
     EXTRA_BUILD_DEPENDS: "pandas statsmodels"
-    TEST_DEPENDS: "cython numpy scipy==1.3.2 statsmodels pandas pytest property_cached"
+    TEST_DEPENDS: "cython numpy==1.19.5 scipy==1.5.4 statsmodels pandas pytest property_cached"
     CONDA_BUILD: "skip"
   TESTPYPI_USERNAME:
     secure: 9D67F9Bcy8PITwg1cezOgw==
@@ -33,6 +33,10 @@ environment:
       PYTHON_VERSION: 3.9
       PYTHON_ARCH: 64
 
+    - PYTHON: C:\Python39
+      PYTHON_VERSION: 3.9
+      PYTHON_ARCH: 32
+
     - PYTHON: C:\Python38-x64
       PYTHON_VERSION: 3.8
       PYTHON_ARCH: 64
@@ -40,10 +44,6 @@ environment:
     - PYTHON: C:\Python37-x64
       PYTHON_VERSION: 3.7
       PYTHON_ARCH: 64
-
-    - PYTHON: C:\Python39
-      PYTHON_VERSION: 3.9
-      PYTHON_ARCH: 32
 
     - PYTHON: C:\Python38
       PYTHON_VERSION: 3.8
