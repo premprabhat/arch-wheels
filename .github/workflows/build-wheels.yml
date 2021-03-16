@@ -25,7 +25,7 @@ jobs:
     env:
       REPO_DIR: arch
       PKG_NAME: arch
-      BUILD_COMMIT: "v4.18" # main
+      BUILD_COMMIT: "v4.19" # main
       PYPI_UPLOAD: true  # true or false
       TESTPYPI_UPLOAD: false
       UNICODE_WIDTH: 32
