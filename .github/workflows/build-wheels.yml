@@ -52,7 +52,7 @@ jobs:
     - name: Pin Numpy, Scipy and Pandas version
       run: |
         if [[ $TRAVIS_PYTHON_VERSION == "3.7" ]]; then
-          echo "NP_BUILD_DEP=$(echo numpy==1.16.6)" >> $GITHUB_ENV;
+          echo "NP_BUILD_DEP=$(echo numpy==1.17.5)" >> $GITHUB_ENV;
           echo "NP_TEST_DEP=$(echo numpy==1.21.1)" >> $GITHUB_ENV;
         fi
         if [[ $TRAVIS_PYTHON_VERSION == "3.8" ]]; then
