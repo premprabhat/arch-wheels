@@ -6,7 +6,7 @@ matrix:
 
 environment:
   global:
-    BUILD_COMMIT: "v5.0"
+    BUILD_COMMIT: "v5.0.1"
     PYPI_UPLOAD: "true"  # "true" or "false"
     TESTPYPI_UPLOAD: "false"
     REPO_DIR: arch
