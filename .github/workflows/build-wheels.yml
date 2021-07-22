@@ -25,8 +25,8 @@ jobs:
     env:
       REPO_DIR: arch
       PKG_NAME: arch
-      BUILD_COMMIT: "main" # main
-      PYPI_UPLOAD: false  # true or false
+      BUILD_COMMIT: "v5.0" # main
+      PYPI_UPLOAD: true  # true or false
       TESTPYPI_UPLOAD: false
       UNICODE_WIDTH: 32
       MB_PYTHON_VERSION: ${{ matrix.python-version }}
