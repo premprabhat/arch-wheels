@@ -97,8 +97,12 @@ jobs:
           echo "TRAVIS_OS_NAME=${{ matrix.os }}" >> $GITHUB_ENV;
         fi
         echo "BUILD_DEPENDS=$(echo $NP_BUILD_DEP $SP_BUILD_DEP $PANDAS_DEP Cython wheel property_cached statsmodels)" >> $GITHUB_ENV;
-        echo "TEST_DEPENDS=$(echo $NP_TEST_DEP $SP_TEST_DEP $PANDAS_DEP pytest property_cached pytest pytest-xdist statsmodels patsy mypy_extensions jupyter jupyter_client nbformat nbconvert==5.6.1)" >> $GITHUB_ENV;
+        echo "TEST_DEPENDS=$(echo $NP_TEST_DEP $SP_TEST_DEP $PANDAS_DEP pytest property_cached pytest pytest-xdist statsmodels patsy mypy_extensions)" >> $GITHUB_ENV;
         echo "DOCKER_TEST_IMAGE=$(echo multibuild/xenial_${{ matrix.PLAT}})" >> $GITHUB_ENV;
+        # focal for 3.10 only
+        if [[ ${{ matrix.python-version }} == "3.10" ]]; then
+          echo "DOCKER_TEST_IMAGE=$(echo multibuild/focal_${{ matrix.PLAT}})" >> $GITHUB_ENV;
+        fi
     - name: Print some Environment variable
       run: |
         echo "ANACONDA_ORG: ${ANACONDA_ORG}"
@@ -127,8 +131,10 @@ jobs:
         python -m pip install --upgrade pip
         source multibuild/common_utils.sh
         source multibuild/travis_steps.sh
+        python -m pip install --upgrade pip
         echo "------ BEFORE INSTALL ---------"
         before_install
+        python -m pip install --upgrade pip
         echo "------ CLEAN CODE --------"
         clean_code $REPO_DIR $BUILD_COMMIT
         echo "------ BUILD WHEEL --------"
