@@ -32,6 +32,8 @@ environment:
     - PYTHON: C:\Python310-x64
       PYTHON_VERSION: 3.10
       PYTHON_ARCH: 64
+      BUILD_DEPENDS: "cython numpy==1.21.4 scipy==1.7.2 property_cached"
+      TEST_DEPENDS: "cython numpy==1.21.4 scipy==1.7.2 statsmodels pandas pytest property_cached"
 
     - PYTHON: C:\Python39-x64
       PYTHON_VERSION: 3.9
@@ -94,7 +96,7 @@ build_script:
     # build wheel:
     - cd %REPO_DIR%
     - git checkout %BUILD_COMMIT%
-    - python setup.py bdist_wheel
+    - python setup.py bdist_wheel --no-build-isolation
     - ls dist/*
 
 test_script:
