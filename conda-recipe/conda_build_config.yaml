@@ -1,9 +1,0 @@
-# Taken and reduced from conda forge
-# conda-forge-pinning-feedstock/master/recipe/conda_build_config.yaml
-# we build for the oldest version possible of numpy for forward compatibility
-python:
-  - 3.6
-  - 3.7
-  - 3.8
-numpy:
-  - 1.14
