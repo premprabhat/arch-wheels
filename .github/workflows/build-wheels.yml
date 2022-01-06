@@ -51,7 +51,10 @@ jobs:
       - name: Build wheels
         run: |
           echo "CIBW_BUILD: ${CIBW_BUILD}"
+          echo "CIBW_BEFORE_BUILD: ${CIBW_BEFORE_BUILD}"
           python -m cibuildwheel --output-dir wheelhouse arch
+        env:
+          CIBW_BEFORE_BUILD: 'git submodule foreach git checkout  ${{ env.BUILD_COMMIT }}'
 
       - name: Upload wheels
         if: always()
