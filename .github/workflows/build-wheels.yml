@@ -39,7 +39,6 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-          ref: ${{ env.BUILD_COMMIT }}
 
       # Used to host cibuildwheel
       - uses: actions/setup-python@v2
