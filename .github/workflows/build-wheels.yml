@@ -10,6 +10,9 @@ jobs:
   build_wheels:
     name: ${{ matrix.os }}, Python ${{ matrix.python }}
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
     strategy:
       fail-fast: false
       matrix:
@@ -17,6 +20,8 @@ jobs:
         os: [ubuntu-20.04, windows-2019, macOS-10.15]
     env:
       BUILD_COMMIT: "main"  # or a specific version, e.g., v0.13.1
+      PYPI_UPLOAD: true  # true or false
+      TESTPYPI_UPLOAD: false
       CIBW_BUILD: ${{ matrix.python }}-*
       CIBW_ARCHS_LINUX: "x86_64"
       CIBW_ARCHS_MACOS: "x86_64 arm64"
@@ -48,3 +53,12 @@ jobs:
         run: |
           echo "CIBW_BUILD: ${CIBW_BUILD}"
           python -m cibuildwheel --output-dir wheelhouse arch
+
+      - name: Upload wheels
+        if: always()
+        run: source twine-upload.sh
+        env:
+          TESTPYPI_USERNAME: ${{ secrets.TESTPYPI_USERNAME }}
+          TESTPYPI_PASSWORD: ${{ secrets.TESTPYPI_PASSWORD }}
+          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
