@@ -27,7 +27,7 @@ jobs:
       CIBW_ARCHS_LINUX: "x86_64 aarch64"
       CIBW_ARCHS_MACOS: "x86_64 arm64"
       # No support for pypy, musl, Win32 for 3.10+
-      CIBW_SKIP: "pp* *-musllinux_x86_64 cp310-win32"
+      CIBW_SKIP: "pp* *-musllinux_x86_64 cp310-win32 *-musllinux_aarch64"
       CIBW_TEST_REQUIRES: pytest pytest-xdist
       CIBW_TEST_COMMAND: python -c "import arch; arch.test(['-n','2','--skip-slow'])"
       CIBW_REPAIR_WHEEL_COMMAND_LINUX: 'auditwheel repair --strip -w {dest_dir} {wheel}'
